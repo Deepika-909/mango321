@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header class="header"><div class="container"><strong>FBS E-Books</strong></div></header>
+    <div class="card" style="max-width:520px;margin:0 auto">
+      <h3>Register</h3>
+      <form action="login.html" method="get">
+        <div class="form-row"><label>Name<input name="name" placeholder="Full name"></label></div>
+        <div class="form-row"><label>Email<input name="email" placeholder="email@example.com"></label></div>
+        <div class="form-row"><label>Password<input type="password" name="password"></label></div>
+        <div class="form-row"><button class="btn" type="submit">Register</button></div>
+      </form>
+    </div>
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function(e){
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const pass = form.password.value;
+    if (!name) {
+      alert('Enter your name');
+      e.preventDefault();
+      return;
+    }
+    if (!email.includes('@gmail.com') || !email.includes('.')) {
+      alert('Enter a valid email');
+      e.preventDefault();
+      return;
+    }
+    if (pass.length < 6) {
+      alert('Password must be ≥ 6 characters');
+      e.preventDefault();
+      return;
+    }
+    localStorage.setItem('registeredUser', email);
+    localStorage.setItem('registeredPass', pass);
+    alert('Registration successful!');
+    window.location.href = 'login.html';
+  });
+</script>
+
+
+</body>
+</html>
