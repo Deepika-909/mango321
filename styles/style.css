@@ -102,11 +102,4 @@ input, label {
   margin: 1.5rem 0;
 }
 
-/* -----------------------------
-   Responsive tweak
-   ----------------------------- */
-@media (max-width: 520px) {
-  .product img {
-    height: 100px;
-  }
-}
+/*a6521695adf4c8970b1b14cbee64aadc*/
