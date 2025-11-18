@@ -1,48 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Register</title>
-    <link rel="stylesheet" href="styles/style.css">
+<title>Register</title>
+<link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <header class="header"><div class="container"><strong>FBS E-Books</strong></div></header>
-    <div class="card" style="max-width:520px;margin:0 auto">
+  <header class="header">
+    <div class="container">
+      <strong>FBS E-Books</strong>
+    </div>
+  </header>
+    <div class="card" style="max-width:480px;margin:2rem auto">
       <h3>Register</h3>
-      <form action="login.html" method="get">
-        <div class="form-row"><label>Name<input name="name" placeholder="Full name"></label></div>
-        <div class="form-row"><label>Email<input name="email" placeholder="email@example.com"></label></div>
-        <div class="form-row"><label>Password<input type="password" name="password"></label></div>
-        <div class="form-row"><button class="btn" type="submit">Register</button></div>
+      <form action="login.html" method="get"> <!-- simulate register -->
+       Name<input name="name" placeholder="Full name">
+       <br><br>
+        Email<input name="email" placeholder="email@example.com">
+        <br><br>
+        Password<input type="password" name="password">
+        <br><br>
+        <button class="btn" type="submit">Register</button>
       </form>
     </div>
+</body>
+</html>
+
+
 <script>
   const form = document.querySelector('form');
   form.addEventListener('submit', function(e){
+    e.preventDefault();
     const name = form.name.value.trim();
     const email = form.email.value.trim();
-    const pass = form.password.value;
+    const password = form.password.value;
+
     if (!name) {
-      alert('Enter your name');
-      e.preventDefault();
-      return;
-    }
-    if (!email.includes('@gmail.com') || !email.includes('.')) {
+       alert('Enter your full name');
+        return;
+     }
+    if(email.indexOf('@') === -1 || email.indexOf('.') === -1)
+    { 
       alert('Enter a valid email');
-      e.preventDefault();
-      return;
+     return;
     }
-    if (pass.length < 6) {
-      alert('Password must be ≥ 6 characters');
-      e.preventDefault();
-      return;
-    }
+    if (password.length < 6) { 
+      alert('Password must be at least 6 characters');
+       return;
+     }
     localStorage.setItem('registeredUser', email);
-    localStorage.setItem('registeredPass', pass);
+    localStorage.setItem('registeredPass', password);
     alert('Registration successful!');
     window.location.href = 'login.html';
   });
 </script>
-
-
-</body>
-</html>

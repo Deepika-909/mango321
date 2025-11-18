@@ -1,43 +1,61 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Payment</title>
-    <link rel="stylesheet" href="styles/style.css">
+<title>Payment</title>
+<link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <header class="header">
     <div class="container">
-        <strong>Payment</strong>
+      <strong>Payment</strong>
     </div>
-</header>
+  </header>
+  <div class="container">
     <div class="card">
       <h3>Checkout</h3>
       <form action="payment_successful.html" method="get">
-        <div class="form-row"><label>Cardholder<input name="cardname" placeholder="Name on card"></label></div>
-        <div class="form-row"><label>Card Number<input name="cardno" placeholder="xxxx-xxxx-xxxx-xxxx"></label></div>
-          <div class="form-row" style="flex:1"><label>Expiry<input name="exp"></label></div>
-          <div class="form-row" style="width:100px"><label>CVV<input name="cvv"></label></div>
-        </div>
-        <div class="form-row"><button class="btn" type="submit">Pay ₹448</button></div>
+        Cardholder<input name="cardname" placeholder="Name on card">
+        <br>
+        Card Number<input name="cardno" placeholder="xxxx-xxxx-xxxx-xxxx">
+        <br>
+        Expiry<input name="exp">
+          CVV<input name="cvv">
+      </div>
+      <button class="btn" type="submit">Pay ₹448</button>
       </form>
     </div>
-<script>
+  </div>
+</body>
+</html>
+
+
+ <script>
   const form = document.querySelector('form');
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    const name = form.cardname.value.trim();
-    const card = form.cardno.value;
+    const cardname = form.cardname.value.trim();
+    const cardno = form.cardno.value.trim();
     const exp = form.exp.value.trim();
     const cvv = form.cvv.value.trim();
 
-    if (!name) { alert('Enter cardholder name'); return; }
-    if (!/^\d{12,19}$/.test(card)) { alert('Enter valid card number'); return; }
-    if (!/^\d{3,4}$/.test(cvv)) { alert('Enter valid CVV'); return; }
-    if (!/^\d{2}\/\d{2}$/.test(exp)) { alert('Expiry must be MM/YY'); return; }
+    if (!cardname) {
+       alert('Enter the name on the card');
+        return;
+     }
+    if(cardno.length !== 19 || cardno.indexOf('-') === -1)
+    { 
+      alert('Enter a valid card number');
+     return;
+    }
+    if (!exp) { 
+      alert('Enter the expiry date');
+       return;
+     }
+    if (cvv.length !== 3) { 
+      alert('Enter a valid CVV');
+       return;
+     }
     alert('Payment successful!');
     window.location.href = 'payment_successful.html';
   });
 </script>
-
-</body>
-</html>
