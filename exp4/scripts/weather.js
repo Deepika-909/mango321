@@ -1,34 +1,29 @@
-const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // replace in execution
-const chartCtx = document.getElementById('chart').getContext('2d');
-let myChart = null;
+const KEY = "a6521695adf4c8970b1b14cbee64aadc";
+const ctx = document.getElementById("chart").getContext("2d");
+let chart;
 
-const fetchWeather = async (city) => {
-  try {
-    // Use metric units to get Celsius directly
-    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&appid=${API_KEY}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    // Take 5 time-points for quick graph
-    const slice = data.list.slice(0,5);
-    const labels = slice.map(i => i.dt_txt.split(' ')[1]); // time part
-    const temps  = slice.map(i => i.main.temp);
-    return {labels, temps};
-  } catch(e) { console.error('Weather fetch error', e); return null; }
-};
+async function fetchWeather(city) {
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${KEY}`;
+  const r = await fetch(url);
+  const d = await r.json();
+  if (!r.ok) return alert(d.message), null;
 
-const render = ({labels, temps}) => {
-  if (myChart) myChart.destroy();
-  myChart = new Chart(chartCtx, {
-    type: 'line',
-    data: { labels, datasets: [{ label: 'Temp (°C)', data: temps, fill:false }]},
-    options: { responsive: true }
+  const s = d.list.slice(0, 5);
+  return {
+    labels: s.map(i => i.dt_txt.split(" ")[1]),
+    temps: s.map(i => i.main.temp)
+  };
+}
+
+function render({ labels, temps }) {
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets: [{ label: "Temp", data: temps }] }
   });
-};
+}
 
-// wire UI
-document.getElementById('go').addEventListener('click', async () => {
-  const city = document.getElementById('city').value;
-  const d = await fetchWeather(city);
+document.getElementById("go").onclick = async () => {
+  const d = await fetchWeather(document.getElementById("city").value);
   if (d) render(d);
-});
-
+};
