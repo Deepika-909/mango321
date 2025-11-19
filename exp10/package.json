@@ -1,10 +1,5 @@
 {
-  "dependencies": {
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0",
-    "nodeman": "^1.1.2"
-  },
-  "name": "exp10",
+  "name": "exp12",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -13,6 +8,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

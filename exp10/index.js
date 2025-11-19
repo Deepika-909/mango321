@@ -1,16 +1,11 @@
-/*const express = require('express');
-const app = express();
-app.use(express.json());
-app.use('/students', require('./student'));
-app.listen(3000, () => console.log('Server running'));
-*/
-
 const express = require('express');
+const studentRoutes = require('./routes/student');
+
 const app = express();
-const verifyToken = require('./middleware');
+const PORT = 3000;
 
-app.use(express.json());
-app.use('/auth', require('./auth'));
-app.use('/students', verifyToken, require('./student')); // Protected routes
+app.use(express.json()); // built-in parser (no body-parser)
+app.use('/api/students', studentRoutes);
 
-app.listen(3000, () => console.log('Server running'));
+app.listen(PORT,
+     () => console.log(`Server: http://localhost:${PORT}`));
