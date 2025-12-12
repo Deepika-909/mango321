@@ -1,4 +1,3 @@
-const KEY = "a6521695adf4c8970b1b14cbee64aadc";
 const ctx = document.getElementById("chart").getContext("2d");
 let chart;
 
